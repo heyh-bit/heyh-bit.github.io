@@ -1,0 +1,774 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="../../../../img/fluid.png">
+  <link rel="icon" href="../../../../img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="heyh">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在使用 Git 进行版本控制时，编写规范的提交（commit）信息是团队协作和项目维护的重要环节。一个标准的 commit message 能够清晰地表达修改内容、便于追踪问题、生成 changelog，并支持自动化工具解析。 以下是目前广泛采用的 Commit Message 标准规范，主要基于 Conventional Commits 规范，并结合社区最佳实践：  一、Commit Messa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git_commit_standard">
+<meta property="og:url" content="https://heyh-bit.github.io/2025/11/19/git-commit-standard/index.html">
+<meta property="og:site_name" content="heyh blog&#39;s">
+<meta property="og:description" content="在使用 Git 进行版本控制时，编写规范的提交（commit）信息是团队协作和项目维护的重要环节。一个标准的 commit message 能够清晰地表达修改内容、便于追踪问题、生成 changelog，并支持自动化工具解析。 以下是目前广泛采用的 Commit Message 标准规范，主要基于 Conventional Commits 规范，并结合社区最佳实践：  一、Commit Messa">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-19T03:51:58.000Z">
+<meta property="article:modified_time" content="2025-12-05T06:26:56.810Z">
+<meta property="article:author" content="heyh">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>git_commit_standard - heyh blog&#39;s</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="../../../../css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="../../../../css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="../../../../css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"heyh-bit.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="../../../../js/utils.js" ></script>
+  <script  src="../../../../js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="../../../../index.html">
+      <strong>heyh blog&#39;s</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../index.html" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('../../../../img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="git_commit_standard"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-19 11:51" pubdate>
+          2025年11月19日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          949 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">git_commit_standard</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>在使用 Git 进行版本控制时，编写规范的提交（commit）信息是团队协作和项目维护的重要环节。一个标准的 commit message 能够清晰地表达修改内容、便于追踪问题、生成 changelog，并支持自动化工具解析。</p>
+<p>以下是目前广泛采用的 <strong>Commit Message 标准规范</strong>，主要基于 <a target="_blank" rel="noopener" href="https://www.conventionalcommits.org/">Conventional Commits</a> 规范，并结合社区最佳实践：</p>
+<hr>
+<h3 id="一、Commit-Message-基本格式"><a href="#一、Commit-Message-基本格式" class="headerlink" title="一、Commit Message 基本格式"></a>一、Commit Message 基本格式</h3><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"><span class="hljs-comment"># 英文版</span><br><span class="hljs-variable">&lt;type&gt;</span>(<span class="hljs-variable">&lt;scope&gt;</span>): <span class="hljs-variable">&lt;subject&gt;</span><br><span class="hljs-variable">&lt;BLANK LINE&gt;</span><br><span class="hljs-variable">&lt;body&gt;</span><br><span class="hljs-variable">&lt;BLANK LINE&gt;</span><br><span class="hljs-variable">&lt;footer&gt;</span><br><br><span class="hljs-comment"># 中文版</span><br><span class="hljs-variable">&lt;类型&gt;</span>(<span class="hljs-variable">&lt;范围&gt;</span>): <span class="hljs-variable">&lt;简要描述&gt;</span><br><span class="hljs-variable">&lt;空行&gt;</span><br><span class="hljs-variable">&lt;详细说明&gt;</span><br><span class="hljs-variable">&lt;空行&gt;</span><br><span class="hljs-variable">&lt;关联信息或备注&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="1-Header（头部）：必须"><a href="#1-Header（头部）：必须" class="headerlink" title="1. Header（头部）：必须"></a>1. <strong>Header（头部）</strong>：必须</h4><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"><span class="hljs-comment"># 英文版</span><br><span class="hljs-variable">&lt;type&gt;</span>(<span class="hljs-variable">&lt;scope&gt;</span>): <span class="hljs-variable">&lt;subject&gt;</span><br><br><span class="hljs-comment"># 中文版</span><br>格式：`<span class="hljs-variable">&lt;类型&gt;</span>(<span class="hljs-variable">&lt;范围&gt;</span>): <span class="hljs-variable">&lt;简要描述&gt;</span>`<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>type</code></strong>：提交类型，表示本次变更的类别。</li>
+<li><strong><code>scope</code></strong>（可选）：变更影响的范围或模块（如 <code>auth</code>, <code>router</code>, <code>ui</code>, <code>docs</code> 等）。</li>
+<li><strong><code>subject</code></strong>：简洁的变更描述，使用<strong>动词开头，小写，不加句号</strong>。</li>
+</ul>
+<p>🔹常见 <code>type</code> 类型：</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>feat</code></td>
+<td>新功能（feature）</td>
+</tr>
+<tr>
+<td><code>fix</code></td>
+<td>修复 bug</td>
+</tr>
+<tr>
+<td><code>docs</code></td>
+<td>文档更新</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>代码格式调整（不影响逻辑，如空格、分号等）</td>
+</tr>
+<tr>
+<td><code>refactor</code></td>
+<td>重构代码（既非新增功能也非修复 bug）</td>
+</tr>
+<tr>
+<td><code>perf</code></td>
+<td>性能优化</td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>添加或修改测试</td>
+</tr>
+<tr>
+<td><code>build</code></td>
+<td>构建系统或依赖变更（如 webpack、npm）</td>
+</tr>
+<tr>
+<td><code>ci</code></td>
+<td>持续集成配置修改（如 GitHub Actions, Travis）</td>
+</tr>
+<tr>
+<td><code>chore</code></td>
+<td>其他杂项任务（如更新脚手架配置）</td>
+</tr>
+<tr>
+<td><code>revert</code></td>
+<td>回滚某个 commit</td>
+</tr>
+<tr>
+<td>🔹 范围（scope，可选）：指明影响的模块、组件或功能区域，例如：</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>user</code>（用户模块）</li>
+<li><code>login</code>（登录页）</li>
+<li><code>api</code>（接口层）</li>
+<li><code>header</code>（头部组件）</li>
+<li><code>router</code>（路由配置）<br> 🔹 简要描述（subject）</li>
+<li>使用动词开头，简洁明确</li>
+<li>不超过 50 字</li>
+<li>小写开头，结尾无句号</li>
+<li>描述“做了什么”，而不是“改了哪些文件”</li>
+</ul>
+<p>✅ 示例：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs text"># 英文版<br>feat(login): add social login buttons<br>fix(api): handle timeout in user profile request<br>docs(readme): update installation guide<br>style(formatter): format code with prettier<br><br># 中文版<br>feat(订单): 添加批量删除功能<br>fix(支付): 修复微信支付超时未回调的问题<br>docs(README): 更新项目部署说明<br>style(表单): 统一输入框样式对齐<br>refactor(用户管理): 抽离权限校验逻辑到公共服务<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-Body（正文）：可选"><a href="#2-Body（正文）：可选" class="headerlink" title="2. Body（正文）：可选"></a>2. <strong>Body（正文）</strong>：可选</h4><p>详细描述修改的原因、背景、解决方案等。建议每行不超过 72 个字符。</p>
+<p>示例：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">The social login buttons were missing from the login page.<br>This change adds Google and Facebook login options using OAuth2.<br><br>Closes #123<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-Footer（页脚）：可选"><a href="#3-Footer（页脚）：可选" class="headerlink" title="3. Footer（页脚）：可选"></a>3. <strong>Footer（页脚）</strong>：可选</h4><p>用于填写：</p>
+<ul>
+<li><strong><code>BREAKING CHANGE:</code></strong>：如果有破坏性变更，必须在此说明。</li>
+<li>关联的问题（issue）、PR 编号等。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">BREAKING CHANGE: The API endpoint `/v1/user` has been removed. Use `/v2/profile` instead.<br><br>Closes #456<br>Refs #789<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="二、完整示例"><a href="#二、完整示例" class="headerlink" title="二、完整示例"></a>二、完整示例</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs text">feat(auth): implement JWT token refresh mechanism<br><br>When the access token expires, the frontend will automatically<br>use the refresh token to obtain a new one without logging out.<br><br>This improves user experience by reducing re-authentication prompts.<br><br>BREAKING CHANGE: The old `/auth/refresh` endpoint is deprecated. Use `/api/v2/auth/refresh`.<br><br>Closes #101<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="三、书写建议（Best-Practices）"><a href="#三、书写建议（Best-Practices）" class="headerlink" title="三、书写建议（Best Practices）"></a>三、书写建议（Best Practices）</h3><ol>
+<li><p><strong>使用祈使语气</strong>（Imperative mood）<br>❌ “Fixed bug” &#x2F; “Fixes bug”<br>✅ “fix bug”</p>
+</li>
+<li><p><strong>首字母小写，结尾无句号</strong><br>✅ <code>update dependencies</code><br>❌ <code>Update dependencies.</code></p>
+</li>
+<li><p><strong>保持简短但清晰</strong><br>主题行建议不超过 50 字符，正文每行不超过 72 字符。</p>
+</li>
+<li><p><strong>避免空白或模糊信息</strong><br>❌ <code>update file</code><br>✅ <code>fix: correct null reference in user service</code></p>
+</li>
+<li><p><strong>关联 issue 或 ticket</strong><br>在 footer 中添加 <code>Closes #123</code> 或 <code>Fixes PROJ-456</code>，便于自动关闭问题。</p>
+</li>
+</ol>
+<hr>
+<h3 id="四、工具支持（推荐）"><a href="#四、工具支持（推荐）" class="headerlink" title="四、工具支持（推荐）"></a>四、工具支持（推荐）</h3><ul>
+<li><strong>commitlint + husky</strong>：校验 commit message 是否符合规范。</li>
+<li><strong>Commitizen</strong>：交互式生成标准 commit。</li>
+<li><strong>VS Code 插件</strong>：如 “GitLens” 或 “Better Commit Policy” 辅助编写。</li>
+</ul>
+<p>安装 commitlint 示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install @commitlint/&#123;config-conventional,cli&#125; --save-dev<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;module.exports = &#123;extends: [&quot;@commitlint/config-conventional&quot;]&#125;;&#x27;</span> &gt; commitlint.config.js<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="五、简化版模板（适合日常开发）"><a href="#五、简化版模板（适合日常开发）" class="headerlink" title="五、简化版模板（适合日常开发）"></a>五、简化版模板（适合日常开发）</h3><p>如果你不需太复杂，可以只用 header 行：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">type(scope): description<br></code></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">feat(profile): allow users to upload avatar<br>fix: prevent crash when loading empty cart<br>docs: add API usage examples<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><table>
+<thead>
+<tr>
+<th>要素</th>
+<th>是否必须</th>
+<th>建议格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>✅ 是</td>
+<td>feat, fix, docs 等</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>❌ 否</td>
+<td>模块名，括号内</td>
+</tr>
+<tr>
+<td>subject</td>
+<td>✅ 是</td>
+<td>小写动词开头，无句号</td>
+</tr>
+<tr>
+<td>body</td>
+<td>❌ 否</td>
+<td>解释 why，非 how</td>
+</tr>
+<tr>
+<td>footer</td>
+<td>❌ 否</td>
+<td>BREAKING CHANGE 或 issue 链接</td>
+</tr>
+</tbody></table>
+<hr>
+<p>遵循标准的 commit 规范，不仅能提升代码可维护性，还能为后续的自动化发布（如 semantic-release）、生成 changelog 提供极大便利。</p>
+<p>📌 推荐阅读：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.conventionalcommits.org/">Conventional Commits 官网</a></li>
+<li>Angular 团队的 <a target="_blank" rel="noopener" href="https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit">commit 规范</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="../../../../tags/Git/" class="print-no-link">#Git</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>git_commit_standard</div>
+      <div>https://heyh-bit.github.io/2025/11/19/git-commit-standard/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>heyh</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年11月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="../../../../js/events.js" ></script>
+<script  src="../../../../js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="../../../../js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="../../../../js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="../../../../js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
