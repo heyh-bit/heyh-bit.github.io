@@ -19,15 +19,15 @@
   <meta name="author" content="heyh">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实战案例 1：定位高 CPU 占用线程12345678# 查看所有线程 CPU 使用率thread# 显示前 3 个最忙线程thread -n 3# 查看指定线程栈（如 ID&#x3D;35）thread 35  输出中可能发现某段代码无限循环或频繁加锁。  实战案例 2：动态查看方法调用参数和返回值12# 监控某个方法的入参和返回值watch com.example.service.UserService">
+    <meta name="description" content="Arthas 是阿里巴巴开源的一款强大的 Java 线上监控诊断工具。 Arthas 可以帮助在不修改代码、不重启应用的情况下，实时监控、诊断和排查线上 Java 应用的问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="arthas-case">
 <meta property="og:url" content="https://heyh-bit.github.io/2026/06/17/jvm/arthas-case/index.html">
 <meta property="og:site_name" content="heyh blog&#39;s">
-<meta property="og:description" content="实战案例 1：定位高 CPU 占用线程12345678# 查看所有线程 CPU 使用率thread# 显示前 3 个最忙线程thread -n 3# 查看指定线程栈（如 ID&#x3D;35）thread 35  输出中可能发现某段代码无限循环或频繁加锁。  实战案例 2：动态查看方法调用参数和返回值12# 监控某个方法的入参和返回值watch com.example.service.UserService">
+<meta property="og:description" content="Arthas 是阿里巴巴开源的一款强大的 Java 线上监控诊断工具。 Arthas 可以帮助在不修改代码、不重启应用的情况下，实时监控、诊断和排查线上 Java 应用的问题。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-17T03:28:31.000Z">
-<meta property="article:modified_time" content="2026-06-18T09:44:59.422Z">
+<meta property="article:modified_time" content="2026-06-22T07:34:24.964Z">
 <meta property="article:author" content="heyh">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="JVM">
@@ -236,7 +236,7 @@
         
         
         
-          21 分钟
+          22 分钟
         
       </span>
     
@@ -278,7 +278,14 @@
             
               <div class="markdown-body">
                 
-                <h3 id="实战案例-1：定位高-CPU-占用线程"><a href="#实战案例-1：定位高-CPU-占用线程" class="headerlink" title="实战案例 1：定位高 CPU 占用线程"></a>实战案例 1：定位高 CPU 占用线程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看所有线程 CPU 使用率</span><br>thread<br><br><span class="hljs-comment"># 显示前 3 个最忙线程</span><br>thread -n 3<br><br><span class="hljs-comment"># 查看指定线程栈（如 ID=35）</span><br>thread 35<br></code></pre></td></tr></table></figure>
+                <p>Arthas 是阿里巴巴开源的一款强大的 Java 线上监控诊断工具。</p>
+<p>Arthas 可以帮助在不修改代码、不重启应用的情况下，实时监控、诊断和排查线上 Java 应用的问题。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>Note：该文档要求 Arthas 版本为 4.x 以上；</p>
+</blockquote>
+<h3 id="实战案例-1：定位高-CPU-占用线程"><a href="#实战案例-1：定位高-CPU-占用线程" class="headerlink" title="实战案例 1：定位高 CPU 占用线程"></a>实战案例 1：定位高 CPU 占用线程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看所有线程 CPU 使用率</span><br>thread<br><br><span class="hljs-comment"># 显示前 3 个最忙线程</span><br>thread -n 3<br><br><span class="hljs-comment"># 查看指定线程栈（如 ID=35）</span><br>thread 35<br></code></pre></td></tr></table></figure>
 
 <p>输出中可能发现某段代码无限循环或频繁加锁。</p>
 <hr>
