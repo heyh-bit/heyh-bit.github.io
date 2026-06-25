@@ -27,7 +27,7 @@
 <meta property="og:description" content="创建型模式提供了创建对象的机制, 能够提升已有代码的灵活性和可复用性。 创建型模式包括 单例、原型、工厂方法、抽象工厂、建造者（生成器）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-23T07:02:18.000Z">
-<meta property="article:modified_time" content="2026-06-25T03:12:22.715Z">
+<meta property="article:modified_time" content="2026-06-25T03:20:14.093Z">
 <meta property="article:author" content="heyh">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="设计模式">
@@ -1885,7 +1885,7 @@
 <td align="left"><strong>“造一个太慢，复印一份更快”</strong></td>
 </tr>
 </tbody></table>
-<h4 id="核心思想图解"><a href="#核心思想图解" class="headerlink" title="核心思想图解"></a>核心思想图解</h4><pre><code class="hljs mermaid">graph LR
+<h4 id="模式选择指南"><a href="#模式选择指南" class="headerlink" title="模式选择指南"></a>模式选择指南</h4><pre><code class="hljs mermaid">graph LR
     A[你要创建一个对象] --&gt; B&#123;全局只要一份?&#125;
     B --&gt;|是| C[单例模式]
     B --&gt;|否| D&#123;不知道该造哪个类?&#125;
