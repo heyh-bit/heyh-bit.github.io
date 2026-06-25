@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://heyh-bit.github.io/2025/06/25/Lambda-Expressions/image-20220321145135117.png">
 <meta property="article:published_time" content="2025-06-25T14:26:55.000Z">
-<meta property="article:modified_time" content="2026-05-11T08:58:03.015Z">
+<meta property="article:modified_time" content="2026-06-22T07:42:18.766Z">
 <meta property="article:author" content="heyh">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -305,7 +305,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Consumer&lt;String&gt; consumer = System.out::println;<br>consumer.accept(<span class="hljs-string">&quot;hello world!&quot;</span>);<br></code></pre></td></tr></table></figure>
 
 <p>函数式接口、Lambda表达式、方法引用（了解）、Stream API三者的核心关系及学习顺序：</p>
-<pre><code class=" mermaid">graph LR
+<pre><code class="hljs mermaid">graph LR
     A[1. 函数式接口] --&gt;|提供目标类型| B[2. Lambda表达式]
     B --&gt;|标准实现方式| C[3. 方法引用]
     C --&gt;|语法糖优化| B
@@ -318,8 +318,7 @@
     style B fill:#CCCCFF,stroke:#333,stroke-width:2px
     style C fill:#CCFFCC,stroke:#333,stroke-width:2px
     style D fill:#FFCC99,stroke:#333,stroke-width:2px
-    style E fill:#E0E0E0,stroke:#333,stroke-width:2px
-</code></pre>
+    style E fill:#E0E0E0,stroke:#333,stroke-width:2px</code></pre>
 
 
 
@@ -1664,5 +1663,12 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-</body>
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    mermaid.initialize({"startOnLoad":true,"theme":"default"});
+  });
+</script>
+<!-- hexo injector body_end end --></body>
 </html>
